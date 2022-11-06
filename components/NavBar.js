@@ -6,8 +6,8 @@ export default function NavBar({}) {
     return (
         <nav className={styles.navblock}>
             <Link href='/'>HeartWiki</Link>
-            <Link href='/about'>About</Link>
             <Link href='/search'>Search</Link>
+            <Link href='/about'>About</Link>
         </nav>
     );
 }

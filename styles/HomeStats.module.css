@@ -1,0 +1,40 @@
+.layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.statbox {
+    border: 1px solid #1EEBB5;
+    background: #121212;
+    width: 47.5%;
+    margin-top: 10px;
+    /* height: 50%; */
+}
+
+.statitemList {
+    display: block;
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0;
+    padding: 10px;
+}
+
+.statitem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+}
+
+.statitem :nth-child(-n+2) {
+    margin-right: 5px;
+}
+
+.statitem :nth-child(2) {
+    width: 100%;
+    overflow: hidden;
+}
