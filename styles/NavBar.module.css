@@ -1,0 +1,13 @@
+.navblock {
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid #1EEBB5;
+    background: #121212;
+    width: 50%;
+    padding: 5px;
+    margin: 10px;
+}
+
+.navblock > * {
+    font-size: 25px;
+}
