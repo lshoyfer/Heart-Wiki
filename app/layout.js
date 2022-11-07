@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <NavBar />
-        <main style={{display: 'flex', justifyContent: "center", width: '75%'}}>
+        <main>
           {children}
         </main>
       </body>
