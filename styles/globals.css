@@ -33,5 +33,15 @@ body {
 main {
   display: flex;
   justify-content: center; 
-  width: 75%
+  width: 90%
 }
+
+/* for Nextjs' temp scroll boundary div intrusion | https://github.com/vercel/next.js/issues/42345 */
+main > :first-child { 
+  width: 100%
+}
+
+/* section > div[data-nextjs-scroll-focus-boundary] > div[data-nextjs-scroll-focus-boundary] {
+  display: flex;
+  width: 100%;
+} */

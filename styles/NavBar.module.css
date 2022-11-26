@@ -1,20 +1,24 @@
 .navblock {
     display: flex;
     justify-content: space-evenly;
-    /* align-items: center; */
     border: 1px solid #1EEBB5;
     background: #121212;
-    width: 50%;
+    width: 60%;
     padding: 10px;
     margin: 10px;
 }
 
 .navblock > * {
-    font-size: 25px;
+    font-size: 38px;
     /* line-height: 35px; */
-    height: 22px;
+    height: 33px;
+    margin: 10px;
     /* text-decoration: none !important; */
 }
+
+/* .navblock :nth-child(n):not(:last-child) {
+    margin-right: 20px;
+} */
 
 /* .navblock > *:link {
     text-decoration: none;

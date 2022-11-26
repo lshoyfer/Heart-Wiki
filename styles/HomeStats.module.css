@@ -9,7 +9,12 @@
     background: #121212;
     width: 47.5%;
     margin-top: 10px;
+    font-size: 25px;
     /* height: 50%; */
+}
+
+.statbox > :first-child {
+    font-size: 30px;
 }
 
 .statitemList {

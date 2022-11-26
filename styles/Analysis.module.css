@@ -1,0 +1,56 @@
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.infoContainer, .infoBar, .comments {
+    background: #121212;
+    border: 1px solid #1EEBB5;
+    padding: 20px;
+    margin-top: 18px;
+}
+
+.infoContainer {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, 'Helvetica Neue', sans-serif;
+}
+
+.infoBar {
+    /* display: inline-block; */
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.title {
+    border-bottom: 1px solid #1EEBB5;
+    /* height: 100%; */
+    /* margin-bottom: 5px; */
+    padding-bottom: 8px;
+    font-size: 30px;
+    text-align: center;
+}
+/* 
+#infoBar :nth-child(n+2) {
+    font-size: 20px;
+    padding: 5px;
+} */
+
+.infoBarMisc {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.infoBarMisc :nth-child(n):not(:last-child) {
+    margin-right: 20px;
+}
+
+.convos {
+    border-bottom: 0.5px dashed #1EEBB5;
+}
