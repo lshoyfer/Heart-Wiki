@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, use, cache } from 'react';
-import { supabaseClient } from '../../utils/supabaseClient';
+import { supabase } from '../../utils/supabaseClient';
 
 export default function Login() {
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ export default function Login() {
         e.preventDefault();
         try {
             setLoading(true);
-            const { error } = await supabaseClient.auth.signInWithOtp({ email });
+            const { error } = await supabase.auth.signInWithOtp({ email });
             if (error) throw error;
             alert('Check email');
         } catch (error) {

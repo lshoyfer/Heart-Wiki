@@ -1,0 +1,21 @@
+.convoContainer, .chatBox, .uploadBox {
+    background: #121212;
+    border: 1px solid #1EEBB5;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.chatBox {
+    resize: vertical;
+    width: 90%;
+}
+
+.uploadBox {
+    /* visibility: hidden; */
+}
+
+.convoContainer {
+    margin-top: 18px;
+    max-height: 70vh;
+    overflow: scroll;
+}

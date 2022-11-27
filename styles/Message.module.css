@@ -1,0 +1,8 @@
+.messageContainer {
+    display: flex;
+}
+
+.userName {
+    margin-left: 10px;
+    margin-right: 10px;
+}

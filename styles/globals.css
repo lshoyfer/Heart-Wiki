@@ -40,8 +40,7 @@ main {
 main > :first-child { 
   width: 100%
 }
-
-/* section > div[data-nextjs-scroll-focus-boundary] > div[data-nextjs-scroll-focus-boundary] {
-  display: flex;
-  width: 100%;
+/* 
+section > div[data-nextjs-scroll-focus-boundary] {
+  height: 100%;
 } */
