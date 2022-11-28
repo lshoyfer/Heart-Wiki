@@ -44,3 +44,8 @@ main > :first-child {
 section > div[data-nextjs-scroll-focus-boundary] {
   height: 100%;
 } */
+
+div[data-nextjs-scroll-focus-boundary]:has( > div > form) {
+  display: flex;
+  justify-content: center;
+}
