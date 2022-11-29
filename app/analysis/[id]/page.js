@@ -2,6 +2,7 @@ import 'server-only';
 import { supabase } from '../../../utils/supabaseClient';
 import styles from '../../../styles/Analysis.module.css';
 import Link from 'next/link';
+import formatTimeStr from '../../../utils/formatTimeStr';
 
 // console.log(styles);
 
@@ -15,8 +16,7 @@ async function getAnalysisData(id) {
 
 export default async function Analysis({ params, searchParams }) {
   const analysis = await getAnalysisData(params.id);
-  const time = (new Intl.DateTimeFormat('en', { timeStyle: 'short', dateStyle: 'short' }))
-    .format(new Date(analysis.created_at));
+  const time = formatTimeStr(analysis.created_at);
 
   return (
     <div className={styles.mainContainer}>

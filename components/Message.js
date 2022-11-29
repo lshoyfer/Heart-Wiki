@@ -32,7 +32,7 @@ export default async function Message({ id }) {
                 src={msg.user.profile_picture} // TODO: no pic edge case
                 width={32}
                 height={32}
-                alt={`${msg.user.username}'s profile picture.`} // temp
+                alt={`${msg.user.username}'s profile picture.`}
             />
             <span className={styles.userName}>{msg.user.username}</span>
             <span dangerouslySetInnerHTML={{ __html: msg.content_html }} />

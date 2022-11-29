@@ -1,25 +1,25 @@
 // "use client";
 
-// import { useState, use, cache } from 'react';
 import { supabase } from '../../utils/supabaseClient';
-import SignIn from '../../components/SignIn';
-import styles from '../../styles/Account.module.css';
+import SignInUpOut from '../../components/SignInUpOut';
+import AccountInfo from '../../components/AccountInfo';
+import * as accountStyles from '../../styles/Account.module.css';
+import * as loginSignupStyles from '../../styles/LoginSignup.module.css';
+import getSession from '../../utils/getSession';
 
 export default async function Account() {
-    const { data, err } = await supabase.auth.getSession();
-    console.log(data, err);
-
+    const data = await getSession();
     return (
         <>{
-            data.session
+            data?.session
                 ? (
-                    <div>
-                        logged in
+                    <div className={accountStyles.container}>
+                        <AccountInfo />
                     </div>
                 )
                 : (
-                    <div className={styles.container}>
-                        <SignIn />
+                    <div className={loginSignupStyles.container}>
+                        <SignInUpOut />
                     </div>
                 )
         }</>

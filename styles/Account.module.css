@@ -3,59 +3,42 @@
     border: 1px solid #1EEBB5;
     padding: 20px;
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column; 
     align-items: center;
 }
 
-.container:first-child {
-    font-size: 40px;
-}
-
-.loginForm {
-    border: 1px dotted #1EEBB5;
-}
-
-.loginForm > * {
-    font-size: 25px;
-}
-
-.loginForm > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-}
-
-.loginForm > div > span {
-    margin-right: 10px;
-    /* border-bottom: 0.5px dashed #DDF6EF; */
-    /* max-width: 20%; */
-    /* width: 20%; */
-    /* margin-top: 10px; */
-}
-
-.loginForm > div > input {
-    border: 1px solid #DDF6EF;
-    background: #121212;
-    width: 100%;
-    font-size: 25px;
-}
-
-.loginForm > :nth-child(n+2) {
+.container > span {
     margin-top: 20px;
+    font-size: 25px;
 }
 
-.button {
-    border: 1px solid #1EEBB5;
-    background: #121212;
-    color: #DDF6EF;
-    font-family: inherit;
-    padding: 10px;
+.container:has(> button) {
+    border: dotted;
+}
+
+#info {
     font-size: 20px;
 }
 
-.button:hover {
-    border: 1px solid #DDF6EF;
-    color: #1EEBB5;
+#info > * {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#info > *:not(:first-child) {
+    margin-top: 10px;
+}
+
+#info > * :first-child:nth-last-child(2) {
+    margin-right: 20px;
+    border-bottom: 1px solid #DDF6EF;
+}
+
+#about > :first-child {
+    font-size: 25px;
+    padding: 15px;
+    border: 1px solid #1EEBB5;
 }
