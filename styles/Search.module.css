@@ -1,0 +1,31 @@
+.container {
+    background: #121212;
+    border: 1px solid #1EEBB5;
+    padding: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+.container > input {
+    border: 1px solid #DDF6EF;
+    background: #121212;
+    width: 100%;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.button {
+    border: 1px solid #1EEBB5;
+    background: #121212;
+    color: #DDF6EF;
+    font-family: inherit;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.button:hover {
+    border: 1px solid #DDF6EF;
+    color: #1EEBB5;
+}

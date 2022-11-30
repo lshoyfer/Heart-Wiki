@@ -11,7 +11,7 @@ export default async function NavBar() {
         <nav className={styles.navblock}>
             <Link href='/'>HeartWiki</Link>
             <Link href='/search'>Search</Link>
-            <Link href='/about'>About</Link>
+            <Link href='/create'>Create</Link>
             {/* <AccountBox /> */}
             <Link href='/account'>{user?.username ?? "Account"}</Link>
         </nav>
