@@ -11,4 +11,5 @@ const options = {
         persistSession: true,
     }
 }
+
 export const supabase = createClient(supabaseURL, supabaseKEY);

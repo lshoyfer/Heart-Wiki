@@ -14,9 +14,40 @@
     font-size: 25px;
 }
 
-.container:has(> button) {
-    border: dotted;
+.container:has(> button:only-child) {
+    border-style: dotted;
 }
+
+.container.red {
+    border-color: red;
+}
+
+#split {
+    display: flex;
+    padding: 20px;
+    flex-direction: row;
+    align-items: stretch;
+    /* border-color: #DDF6EF;
+    border-style: dashed; */
+    /* justify-content: stretch; */
+}
+
+#split > :first-child {
+    resize: none;
+    min-width: 50%;
+    margin-right: 10px;
+}
+
+#split > :first-child:hover {
+    border-color: #DDF6EF;
+}
+
+#split > * {
+    border-style: dotted;
+    font-size: 16px;
+    margin-top: 0;
+}
+
 
 #info {
     font-size: 20px;

@@ -1,17 +1,29 @@
 'use client';
 import 'client-only';
 import { useState, cache, useEffect } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '../../utils/supabaseClient';
 import { useRouter } from 'next/navigation';
-import styles from '../styles/LoginSignup.module.css';
+import styles from '../../styles/LoginSignup.module.css';
 
 // use nextjs router reload
 
-const cachedLoginSignupSB = cache(async (isSignup, credsObj) => {
-    console.log('in cache', isSignup, credsObj);
-    return isSignup
-        ? supabase.auth.signUp(credsObj)
-        : supabase.auth.signInWithPassword(credsObj);
+const cachedLoginSignupSB = cache(async (isSignup, credentials, username) => {
+    // console.log('in cache', isSignup, credsObj);
+    if (isSignup) {
+        const { data, signUpError } = await supabase.auth.signUp(credentials);
+        const { insertError } = await supabase
+            .from('user')
+            .insert({
+                username,
+                auth_id: data.user.id
+            });
+        return { data, signUpError };
+    } else {
+        return supabase.auth.signInWithPassword(credentials);
+    }
+    // return isSignup
+    //     ? supabase.auth.signUp(credsObj)
+    //     : supabase.auth.signInWithPassword(credsObj);
 });
 
 supabase.auth.onAuthStateChange((e, session) => {
@@ -31,15 +43,17 @@ export default function SignInUpOut({ isSignOut }) {
     const [err, setErr] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [isSignupPage, setIsSignupPage] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         if (loading) {
             (async () => {
-                const { data, err } = await cachedLoginSignupSB(isSignupPage, { email, password });
+                const { data, err } = await cachedLoginSignupSB(isSignupPage, { email, password }, username);
                 if (err) setErr(true);
                 else {
+                    console.log('DATA OBJ', isSignupPage, data);
                     setLoading(false);
                     setEmail('');
                     setPassword('')
@@ -47,12 +61,12 @@ export default function SignInUpOut({ isSignOut }) {
                 }
             })();
         }
-    }, [loading, email, password, isSignupPage, router]);
+    }, [loading, email, password, username, isSignupPage, router]);
 
 
     if (isSignOut) {
         return (
-            <button 
+            <button
                 onClick={async () => { await supabase.auth.signOut(); router.refresh() }}
                 className={styles.button}
             >
@@ -80,6 +94,10 @@ export default function SignInUpOut({ isSignOut }) {
         setEmail(e.target.value);
     }
 
+    const handleUsername = (e) => {
+        setUsername(e.target.value);
+    }
+
     return (
         <>
             <div>{isSignupPage ? 'Sign Up' : 'Sign In'}</div>
@@ -92,6 +110,12 @@ export default function SignInUpOut({ isSignOut }) {
                     <span>Password</span>
                     <input onChange={handlePassword} value={password} type='password' />
                 </div>
+                {isSignupPage &&
+                    <div>
+                        <span>Username</span>
+                        <input onChange={handleUsername} value={username} type='text' />
+                    </div>
+                }
                 <button className={styles.button}>{isSignupPage ? "Sign Up" : "Login"}</button>
                 {err && <span style={{ color: 'red' }}>Invalid Input</span>}
             </form>
