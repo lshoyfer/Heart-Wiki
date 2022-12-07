@@ -53,7 +53,7 @@ export default function SignInUpOut({ isSignOut }) {
                 const { data, err } = await cachedLoginSignupSB(isSignupPage, { email, password }, username);
                 if (err) setErr(true);
                 else {
-                    console.log('DATA OBJ', isSignupPage, data);
+                    // console.log('DATA OBJ', isSignupPage, data);
                     setLoading(false);
                     setEmail('');
                     setPassword('')
@@ -67,7 +67,7 @@ export default function SignInUpOut({ isSignOut }) {
     if (isSignOut) {
         return (
             <button
-                onClick={async () => { await supabase.auth.signOut(); router.refresh() }}
+                onClick={async () => { await supabase.auth.signOut(); router.push('/account'); router.refresh() }}
                 className={styles.button}
             >
                 Sign Out

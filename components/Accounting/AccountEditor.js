@@ -6,7 +6,7 @@ import * as borrowedLoginSignUpCSS from '../../styles/LoginSignup.module.css';
 import { supabase } from '../../utils/supabaseClient';
 import { useRouter } from 'next/navigation';
 
-const formReducer = (state, payload) => {
+const accountFormReducer = (state, payload) => {
     switch (payload.type) {
         case 'USERNAME':
             return { ...state, username: payload.body };
@@ -31,7 +31,7 @@ export default function AccountEditor({
     discord,
     id
 }) {
-    const [state, d] = useReducer(formReducer, {
+    const [state, d] = useReducer(accountFormReducer, {
         username, name, location, discord
     }); // d for dispatch
     const [err, setErr] = useState(false);

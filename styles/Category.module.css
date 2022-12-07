@@ -1,0 +1,126 @@
+.container {
+    background: #121212;
+    border: 1px solid #1EEBB5;
+    padding: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+}
+
+.container > :not(:first-child) {
+    margin-top: 10px;
+}
+
+.container div[data-nextjs-scroll-focus-boundary] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container div[data-nextjs-scroll-focus-boundary] > :not(:first-child) {
+    margin-top: 10px;
+}
+
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #1EEBB5;
+    padding: 10px;
+    font-size: 25px;
+}
+
+.infoBar {
+    padding: 5px;
+    border: 1px dotted #1EEBB5;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoBar > * {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoBar > div > :first-child {
+    margin-right: 25px;
+}
+
+.description {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.tags {
+    border: 2px dashed #1EEBB5;
+    border-width: 1px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 8px;
+    font-style: italic;
+    padding: 3px;
+    width: fit-content;
+    flex-wrap: nowrap;
+}
+
+.tagItem {
+    border: 1px transparent;
+    margin-right: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+}
+
+.tagItem:last-of-type {
+    margin-right: 0;
+}
+
+.splitPanel {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #1EEBB5;
+    padding: 10px;
+    align-items: center;
+}
+
+
+.splitPanel > :first-child {
+    margin-right: 10px;
+}
+
+.splitPanel > * {
+    display: flex;
+    flex-direction: column;
+    border: 1.5px dotted #1EEBB5;
+}
+
+.splitPanel > * > :first-child {
+    border: 1px dashed #1EEBB5;
+}
+
+.authErr {
+    text-align: center;
+    border: 1px solid red;
+    font-size: 16px;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+#edit {
+    margin-top: 0;
+    color: #DDF6EF;
+    font-family: inherit;
+    padding: 10px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+#edit:hover {
+    color: #1EEBB5;
+}

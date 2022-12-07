@@ -10,7 +10,7 @@ export default async function Account() {
     const data = await getSession();
     return (
         <>{
-            data?.session
+            (data?.user.aud === 'authenticated')
                 ? (
                     <div className={accountStyles.container}>
                         <AccountInfo />

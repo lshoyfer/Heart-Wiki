@@ -1,21 +1,150 @@
-.convoContainer, .chatBox, .uploadBox {
+/* we do not discuss this module */
+/* avert the eyes, i am probably never refactoring this */
+
+.container {
+    padding: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+}
+
+.container> :not(:first-child) {
+    margin-top: 10px;
+}
+
+.container div[data-nextjs-scroll-focus-boundary] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container div[data-nextjs-scroll-focus-boundary]> :not(:first-child) {
+    margin-top: 10px;
+}
+
+.infoBox,
+.convoContainer,
+.chatBox,
+.uploadBox {
     background: #121212;
     border: 1px solid #1EEBB5;
     padding: 20px;
     margin-top: 10px;
 }
 
-.chatBox {
-    resize: vertical;
-    width: 90%;
+/* .convoContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: scroll
+} */
+
+.infoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
 }
 
+.infoBox> :first-child {
+    font-size: 25px;
+}
+
+.infoBox> :nth-child(2) {
+    border-top: 2px dotted #1EEBB5;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.infoBox>div {
+    border: 1px dotted #1EEBB5;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.infoBox>div> :not(:last-child) {
+    margin-right: 10px;
+}
+
+
 .uploadBox {
-    /* visibility: hidden; */
+    margin-top: 0;
+}
+
+/* Not accessible either but alas */
+.uploadBox>input[type="file"] {
+    display: none;
+}
+
+.chatBox {
+    resize: vertical;
+    width: 100%;
+}
+
+.inputHandlers {
+    align-self: flex-end;
+    display: flex;
+    align-items: stretch;
+}
+
+.inputHandlers> :first-child {
+    margin-right: 10px;
 }
 
 .convoContainer {
     margin-top: 18px;
     max-height: 70vh;
+    width: 100%;
     overflow: scroll;
+    max-width: 100%;
+    /* overflow-wrap: break-word; */
+}
+
+.convoContainer p {
+    word-break: break-all;
+    /* overflow-wrap: break-word; */
+    /* max-width: 100%; */
+    /* width: min-content; */
+    /* display: inline-block; */
+
+}
+
+#formContainer {
+    width: 100%;
+    margin-top: 0;
+}
+
+.convoContainer .emptyErr {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.category {
+    font-style: italic;
+}
+
+.msgErr {
+    background-color: #121212;
+    border: 1px solid red;
+    font-size: 20px;
+    padding: 5px;
+    font-style: italic;
+}
+
+.edit {
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.edit:hover {
+    color: #1EEBB5;
 }

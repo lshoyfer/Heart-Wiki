@@ -22,6 +22,10 @@
     border-color: red;
 }
 
+.container.white {
+    border-color: #DDF6EF;
+}
+
 #split {
     display: flex;
     padding: 20px;

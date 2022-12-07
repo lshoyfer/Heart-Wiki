@@ -23,7 +23,7 @@ export default async function Settings() {
                             Account Editor
                         </Link>
                     </div>
-                    <div className={styles.container}>
+                    <div className={`${styles.container} ${styles.white}`}>
                         <SignInUpOut isSignOut />
                     </div>
                     <div className={`${styles.container} ${styles.red}`}>

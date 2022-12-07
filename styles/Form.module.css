@@ -1,0 +1,60 @@
+/* ripped from LoginSignUp.module.
+
+TODO: adjust for all pages to ref this rather than borrow LoginSignup
+
+*/
+
+.form {
+    background: #121212;
+    border: 1px dotted #1EEBB5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    max-width: 100%;
+}
+
+.form:first-child {
+    font-size: 40px;
+}
+
+.form > * {
+    font-size: 25px;
+}
+
+.form > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+
+.form > div > span {
+    margin-right: 10px;
+}
+
+.form > div > input {
+    border: 1px solid #DDF6EF;
+    background: #121212;
+    width: 100%;
+    font-size: 25px;
+}
+
+.form > :nth-child(n+2) {
+    margin-top: 20px;
+}
+
+.submit {
+    border: 1px solid #1EEBB5;
+    background: #121212;
+    color: #DDF6EF;
+    font-family: inherit;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.submit:hover {
+    border: 1px solid #DDF6EF;
+    color: #1EEBB5;
+    cursor: pointer;
+}

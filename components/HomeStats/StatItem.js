@@ -1,7 +1,6 @@
 import 'server-only';
 import styles from '../../styles/HomeStats.module.css';
 import Image from 'next/image';
-import sasukeIMG from '../../utils/sasuketest.jpeg';
 
 export default function StatItem({
     item,
@@ -9,7 +8,7 @@ export default function StatItem({
     return (
         <div className={styles.statitem}>
             <Image 
-                src={sasukeIMG} // TODO: no pic edge case
+                src={'https://ogqlzchzftdqgeolrbzc.supabase.co/storage/v1/object/public/avatar/sb_test1.jpg'} // TODO: no pic edge case
                 width={32}
                 height={32}
                 alt={item.title} // temp

@@ -17,6 +17,10 @@
     /* text-decoration: none !important; */
 }
 
+.navblock > *:hover {
+    color: #1EEBB5;
+}
+
 /* .navblock :nth-child(n):not(:last-child) {
     margin-right: 20px;
 } */
