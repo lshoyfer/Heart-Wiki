@@ -2,7 +2,6 @@ import 'server-only';
 import { supabase } from '../../../utils/supabaseClient';
 import styles from '../../../styles/Category.module.css';
 import formatTimeStr from '../../../utils/formatTimeStr';
-import { CategoryTagItem } from '../../../components/Creation';
 import Link from 'next/link';
 import getCategoryData from '../../../utils/getCategoryData';
 import getCurrentUser from '../../../utils/getCurrentUser';
@@ -15,11 +14,6 @@ export default async function CategoryViewer({ params }) {
             <div className={styles.title}>
                 {data.name}
             </div>
-            {data.tags &&
-                <div className={styles.tags}>
-                    {data.tags.map((n, i) => <CategoryTagItem key={i} name={n} />)}
-                </div>
-            }
             <div className={styles.infoBar}>
                 <div>
                     <span>Created by</span>

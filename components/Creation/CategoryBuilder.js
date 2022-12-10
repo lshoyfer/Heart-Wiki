@@ -27,14 +27,12 @@ const categoryFormReducer = (state, payload) => {
 
 export default function CategoryBuilder({ auth, user, updateID = null, defaults = null }) {
     const [state, d] = useReducer(categoryFormReducer, defaults ?
-        { ...defaults, creator: user.id, tags: new Set(defaults.tags) }
+        { ...defaults, creator: user.id }
         :
         {
             name: '',
             description: '',
             creator: user.id,
-            rawTags: '',
-            tags: new Set()
         }
     );
     const [err, setErr] = useState(false);
@@ -45,10 +43,6 @@ export default function CategoryBuilder({ auth, user, updateID = null, defaults 
         e.preventDefault();
 
         const stateCopy = { ...state };
-        delete stateCopy.rawTags;
-        stateCopy.tags = [...stateCopy.tags];
-
-
 
         const { data } = !updateID
             ? await supabase
@@ -106,26 +100,6 @@ export default function CategoryBuilder({ auth, user, updateID = null, defaults 
                     <input
                         onChange={(e) => { d({ type: 'DESCRIPTION', body: e.target.value }) }}
                         value={state.description}
-                        type='text'
-                    />
-                </div>
-                <div>
-                    <span>Tags</span>
-                    <input
-                        onChange={(e) => {
-                            d({
-                                type: 'TAGS',
-                                rawTags: e.target.value,
-                                body: new Set(
-                                    e.target.value
-                                        .replaceAll(/\s+/g, '')
-                                        .replaceAll(/,$/g, '')
-                                        .toLowerCase()
-                                        .split(',')
-                                )
-                            })
-                        }}
-                        value={state.rawTags}
                         type='text'
                     />
                 </div>

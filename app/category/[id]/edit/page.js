@@ -7,7 +7,7 @@ import { CategoryBuilder } from '../../../../components/Creation';
 
 export default async function CategoryEditPage({ params }) {
     const userData = await getCurrentUser();
-    const { name, description, tags, creator } = await getCategoryData(params.id);
+    const { name, description, creator } = await getCategoryData(params.id);
 
     if (!userData.auth) {
         return (
@@ -29,8 +29,6 @@ export default async function CategoryEditPage({ params }) {
             defaults={{
                 name,
                 description,
-                tags,
-                rawTags: tags.join(', ')
             }}
         />
     );
