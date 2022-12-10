@@ -1,0 +1,43 @@
+.threePanelContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.threePanelContainer> :not(:last-child) {
+    margin-right: 20px;
+}
+
+.panel {
+    background: #121212;
+    border: 1px solid #1EEBB5;
+    padding: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homeItem {
+    font-size: 16px;
+    padding: 5px;
+    margin-top: 10px;
+    border: 1px solid #1EEBB5;
+}
+
+/* .homeItem:not(:first-of-type) {
+    margin-top: 10px
+}
+
+.homeItem:first-of-type {
+    font-size: 25px;
+} */
+
+.homeItem:hover {
+    color: #1EEBB5;
+    border-color: #DDF6EF;
+}
+
+.title {
+    font-size: 25px;
+}

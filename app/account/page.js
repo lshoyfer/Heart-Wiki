@@ -1,5 +1,5 @@
 // "use client";
-
+import 'server-only';
 import { supabase } from '../../utils/supabaseClient';
 import { SignInUpOut, AccountInfo } from '../../components/Accounting';
 import * as accountStyles from '../../styles/Account.module.css';
@@ -10,7 +10,7 @@ export default async function Account() {
     const data = await getSession();
     return (
         <>{
-            (data?.user.aud === 'authenticated')
+            (data.user?.aud === 'authenticated')
                 ? (
                     <div className={accountStyles.container}>
                         <AccountInfo />

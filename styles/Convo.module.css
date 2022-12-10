@@ -148,3 +148,7 @@
 .edit:hover {
     color: #1EEBB5;
 }
+
+.chatBoxEditMode {
+    border-color: #DDF6EF;
+}

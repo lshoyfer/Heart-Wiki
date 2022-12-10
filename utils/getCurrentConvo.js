@@ -7,5 +7,5 @@ export default async function getCurrentConvo(id) {
 		.select('*, creator:user(username)')
 		.eq('id', id);
 
-	return data[0];
+	return data?.at(0);
 }
