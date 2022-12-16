@@ -9,7 +9,6 @@ import formatTimeStr from '../../../utils/formatTimeStr';
 import getCurrentUser from '../../../utils/getCurrentUser';
 import Link from 'next/link';
 
-
 async function getMsgsContent(convoID) {
 	return supabase
 		.from('msg')
@@ -27,9 +26,9 @@ async function getMsgsContent(convoID) {
 export default async function ConvoPage({ params }) {
 	const convo = await getCurrentConvo(params.id);
 	const userData = await getCurrentUser();
+	if (!convo?.id) return (<div>Convo doesn't exist.</div>);
 	const { data: msgContents } = await getMsgsContent(convo.id);
-	// console.log('got data', msgContents.data, convo.id);
-	// console.log('here', convo);
+
 	return (
 		<>
 			<div className={styles.infoBox}>
@@ -39,7 +38,7 @@ export default async function ConvoPage({ params }) {
 					<span>{convo.creator?.username ?? 'Public'}</span>
 					<span>{formatTimeStr(convo.created_at)}</span>
 				</div>
-				{convo.categories &&
+				{false && (console.log(convo.categories) ?? convo.categories) && // DISABLED
 					<div>
 						{convo.categories.map((name, index) =>
 							(<span className={styles.category} key={index}>{name}</span>)

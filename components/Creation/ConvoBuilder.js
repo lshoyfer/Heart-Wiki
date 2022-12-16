@@ -92,26 +92,16 @@ export default function ConvoBuilder({ auth, user, updateID = null, defaults = n
     }
 
     const deleteConvo = async () => {
-        const msgs = (await supabase
+        await supabase
+            .from('msg')
+            .delete()
+            .eq('convo', updateID);
+
+        await supabase
             .from('convo')
-            .select('msgs')
-            .eq('id', updateID))?.data?.at(0).msgs;
+            .delete()
+            .eq('id', updateID);
 
-        const delMsgs = await Promise.all(
-            msgs.map(msgID => (
-                supabase
-                    .from('msg')
-                    .delete()
-                    .eq('id', msgID)
-            ))
-        );
-        
-        const shit = await supabase
-                .from('convo')
-                .delete()
-                .eq('id', updateID)
-
-        console.log('deleted', delMsgs, shit);
         router.push('/');
         router.refresh();
     }

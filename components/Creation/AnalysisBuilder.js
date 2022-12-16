@@ -44,9 +44,10 @@ export default function AnalysisBuilder({ auth, user, updateID = null, defaults 
             (await supabase
                 .from('convo')
                 .insert({ title: `${title} General Comments`, is_comment_section: true })
-                .select()).data[0]
+                .select()).data?.at(0)
             : null;
 
+        // console.log(commentsdata);
         const { data: analysisdata } = !updateID
             ? await supabase
                 .from('analysis')
@@ -95,13 +96,15 @@ export default function AnalysisBuilder({ auth, user, updateID = null, defaults 
         const { data: deletedCommentsData } = await supabase
             .from('convo')
             .delete()
-            .eq('id', deletedAnalysisData[0].comments);
+            .eq('id', deletedAnalysisData[0].comments)
+            .select();
 
+        console.log(deletedCommentsData);
         // delete all msgs in comments section
         supabase
             .from('msg')
             .delete()
-            .eq('convo', deletedCommentsData[0].id)
+            .eq('convo', deletedCommentsData?.at(0).id)
 
         // delete all associated convos
         const { data: deletedConvosData } = await supabase

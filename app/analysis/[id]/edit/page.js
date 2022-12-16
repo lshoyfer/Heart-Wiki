@@ -11,7 +11,9 @@ export default async function AnalysisEditorPage({ params }) {
         content_md: contentMD,
         title,
         category,
-    } = await getAnalysisData(params.id);
+    } = await getAnalysisData(params.id) ?? {};
+    if (!title) return (<div>Page was deleted</div>);
+
 
 
     return (
