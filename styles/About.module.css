@@ -1,0 +1,34 @@
+.mainContainer {
+    background: #121212;
+    border: 1px solid #1EEBB5;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+}
+
+.img {
+    height: 100%;
+    width: auto;
+}
+
+.mainContainer > *:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.mainContainer > span:first-of-type {
+    border: 1px dotted #1EEBB5;
+    padding: 10px;
+    font-size: 50px;
+}
+
+.mainContainer > a {
+    text-decoration: underline;
+}
+
+.mainContainer > a:hover {
+    color: #1EEBB5;
+}
