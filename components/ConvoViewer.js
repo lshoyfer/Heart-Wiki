@@ -12,8 +12,15 @@ export default function ConvoViewer({ msgs, userData, convo }) {
     const [msgArr, setMsgArr] = useState(msgs);
     const [isEditMode, setIsEditMode] = useState(false);
     const [msgBeingEdited, setMsgBeingEdited] = useState({});
+    const [uploadContent, setUploadContent] = useState([]);
     const convoDisplayRef = useRef();
     const router = useRouter();
+
+
+    const handleUploadContent = (content) => {
+        setUploadContent([...uploadContent, ...content]);
+    }
+
 
     const handleClientMsgDelete = (index) => {
         // reallllly shoulda used a hashmap
@@ -21,6 +28,23 @@ export default function ConvoViewer({ msgs, userData, convo }) {
             ...msgArr.slice(0, index),
             ...msgArr.slice(index + 1)
         ]);
+    }
+
+    const flushXUploadState = ({ index, all = false }) => {
+        all
+            ? setUploadContent([])
+            : setUploadContent([
+                ...uploadContent.slice(0, index),
+                ...uploadContent.slice(index + 1)
+            ]);
+    }
+
+
+    const swapMsgBeingEdited = (newIndex) => {
+        setMsgBeingEdited({
+            index: newIndex,
+            data: msgArr?.at(newIndex)
+        })
     }
 
     const toggleEditMode = (index) => {
@@ -38,20 +62,18 @@ export default function ConvoViewer({ msgs, userData, convo }) {
         setMsgBeingEdited({});
     }
 
-    const handleClientMsg = (msg, mode) => {
-        // console.log('client', msg, convo, msgArr);
-        if (mode === 'INSERT') setMsgArr([...msgArr, msg]);
+    const handleClientMsg = (uploadArr, msg, mode) => {
+        if (mode === 'INSERT') setMsgArr([...msgArr, ...uploadArr].concat(msg ?? []));
         else if (mode === 'UPDATE') {
             const msgArrCopy = [...msgArr];
             msgArrCopy[msgBeingEdited.index] = msg;
             setMsgArr(msgArrCopy);
-        } else if (mode === 'DELETE') {
-            // TODO
         }
     }
 
     const handleServerMsg = async (payload) => {
-        if (payload.new.owner !== userData.user.id) {
+        if ((payload.new.owner !== userData.user.id)
+            || (payload.old?.owner && (payload.old?.owner !== userData.user.id))) {
             /*
                 My hand is forced to do a follow up fetch
                 for username & pfp unless I want to hard
@@ -64,14 +86,14 @@ export default function ConvoViewer({ msgs, userData, convo }) {
             if (payload.eventType === 'INSERT') {
                 const { data: ownerData } = await supabase
                     .from('user')
-                    .select('username, profile_picture')
+                    .select('username, profile_picture, id')
                     .eq('id', payload.new.owner)
-                delete payload.new.owner;
                 payload.new.user = ownerData?.at(0);
                 setMsgArr([...msgArr, payload.new]);
+
             } else if (payload.eventType === 'UPDATE') {
                 // I dont feel like rewriting msgArr to be a hashmap
-                let updatedMsgIndex = null; 
+                let updatedMsgIndex = null;
                 for (let i = msgArr.length - 1; i >= 0; i--) {
                     if (msgArr[i].id === payload.new.id) {
                         updatedMsgIndex = i;
@@ -79,8 +101,7 @@ export default function ConvoViewer({ msgs, userData, convo }) {
                     }
                 }
                 const msgArrCopy = [...msgArr];
-                delete payload.new.owner;
-                payload.new.user = msgArr[updatedMsgIndex].user;
+                payload.new.user = msgArr?.at(updatedMsgIndex)?.user;
                 msgArrCopy[updatedMsgIndex] = payload.new;
                 setMsgArr(msgArrCopy);
             } else if (payload.eventType === 'DELETE') {
@@ -110,6 +131,7 @@ export default function ConvoViewer({ msgs, userData, convo }) {
                 toggleEditMode,
                 disableEditMode,
                 msgBeingEdited,
+                swapMsgBeingEdited,
                 deleteMsgClient: handleClientMsgDelete,
                 convo,
                 ...userData
@@ -120,7 +142,13 @@ export default function ConvoViewer({ msgs, userData, convo }) {
                 <div style={{ height: '100px' }} />
             </div>
 
-            <ChatBox clientMsgHandler={handleClientMsg} serverMsgHandler={handleServerMsg} />
+            <ChatBox
+                clientMsgHandler={handleClientMsg}
+                serverMsgHandler={handleServerMsg}
+                handleUploadContent={handleUploadContent}
+                uploadContent={uploadContent}
+                flushXUploadState={flushXUploadState}
+            />
         </ConvoContext.Provider>
     )
 }

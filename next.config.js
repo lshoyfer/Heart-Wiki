@@ -1,5 +1,5 @@
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   experimental: {
     appDir: true
   },
@@ -24,5 +24,10 @@ const nextConfig = {
   is no helpful info online about it due to NextJS 18 being new/experimental 
   so I had to brute force it like this)
 */
+
+/*
+  Do not update @next/font, it breaks everything inexplicably
+*/
+
 
 module.exports = nextConfig;

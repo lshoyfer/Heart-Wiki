@@ -15,7 +15,7 @@ export default async function CategoryEditPage({ params }) {
                 You must be logged in first!
             </div>
         );
-    } else if (userData.user.username !== creator.username) { // weak check but alas, it doesn't matter
+    } else if (userData.user.id !== creator.id) {
         return (
             <div className={styles.authErr}>
                 You are not the creator!
@@ -28,7 +28,7 @@ export default async function CategoryEditPage({ params }) {
             updateID={params.id} 
             defaults={{
                 name,
-                description,
+                description
             }}
         />
     );

@@ -10,8 +10,7 @@ export default async function AnalysisEditorPage({ params }) {
         content_html: contentHTML,
         content_md: contentMD,
         title,
-        categories,
-        convos
+        category,
     } = await getAnalysisData(params.id);
 
 
@@ -24,10 +23,8 @@ export default async function AnalysisEditorPage({ params }) {
                     contentHTML,
                     contentMD,
                     title,
-                    categories: categories,
-                    rawCategories: categories?.join(', ')
+                    category
                 }}
-                currentConvos={convos}
             />
         </div>
     );

@@ -18,7 +18,7 @@ export default async function RootLayout({ children }) {
   // console.log('LAYOUT', data);
 
   return (
-    <html lang='en' className={vgaFont.className}>
+    <html lang='en' className={vgaFont?.className}>
       <head>
 
       </head>

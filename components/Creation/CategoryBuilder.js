@@ -9,12 +9,6 @@ import { form, submit } from '../../styles/Form.module.css';
 
 const categoryFormReducer = (state, payload) => {
     switch (payload.type) {
-        case 'TAGS':
-            return {
-                ...state,
-                rawTags: payload.rawTags,
-                tags: new Set(payload.body)
-            };
         case 'NAME':
             return { ...state, name: payload.body };
         case 'DESCRIPTION':

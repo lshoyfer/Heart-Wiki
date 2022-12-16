@@ -12,12 +12,8 @@ const analysisFormReducer = (state, payload) => {
     switch (payload.type) {
         case 'TITLE':
             return { ...state, title: payload.body };
-        case 'CATEGORIES':
-            return {
-                ...state,
-                rawCategories: payload.rawCategories,
-                categories: new Set(payload.body)
-            };
+        case 'CATEGORY':
+            return { ...state, category: payload.body };
         case 'CONTENT_MD':
             return { ...state, contentMD: payload.body };
         case 'CONTENT_HTML':
@@ -27,16 +23,15 @@ const analysisFormReducer = (state, payload) => {
             return { ...state };
     }
 }
-export default function AnalysisBuilder({ auth, user, updateID = null, defaults = null, currentConvos = null }) {
+export default function AnalysisBuilder({ auth, user, updateID = null, defaults = null }) {
     const [state, d] = useReducer(analysisFormReducer, defaults ?
-        { ...defaults, categories: new Set(defaults.categories) }
+        { ...defaults }
         :
         {
             title: '',
-            categories: new Set(),
-            rawCategories: '',
             contentMD: '',
-            contentHTML: ''
+            contentHTML: '',
+            category: ''
         }
     );
     const [err, setErr] = useState(false);
@@ -44,35 +39,33 @@ export default function AnalysisBuilder({ auth, user, updateID = null, defaults 
     const router = useRouter();
 
     const createAnalysis = async () => {
-        const { title, categories, contentMD: content_md, contentHTML: content_html } = state;
-        const commentsData = !updateID &&
+        const { title, category, contentMD: content_md, contentHTML: content_html } = state;
+        const commentsdata = !updateID ?
             (await supabase
                 .from('convo')
                 .insert({ title: `${title} General Comments`, is_comment_section: true })
                 .select()).data[0]
+            : null;
 
-        const { data: analysisData } = !updateID
+        const { data: analysisdata } = !updateID
             ? await supabase
                 .from('analysis')
                 .insert({
-                    title, content_md, content_html,
-                    convos: [],
-                    comments: commentsData.id,
+                    title, content_md, content_html, category,
+                    comments: commentsdata.id,
                     owner: user.id,
-                    categories: [...categories]
                 })
                 .select()
             : await supabase
                 .from('analysis')
                 .update({
-                    title, content_md, content_html,
-                    categories: [...categories]
+                    title, content_md, content_html, category
                 })
                 .eq('id', updateID)
                 .select();
 
-        if (analysisData) {
-            router.push(`analysis/${analysisData[0].id}`);
+        if (analysisdata) {
+            router.push(`analysis/${analysisdata[0].id}`);
             router.refresh();
         } else {
             setErr(true);
@@ -91,25 +84,37 @@ export default function AnalysisBuilder({ auth, user, updateID = null, defaults 
     }
 
     const deleteAnalysis = async () => {
-        const { data } = await supabase
+        // delete analysis
+        const { data: deletedAnalysisData } = await supabase
             .from('analysis')
             .delete()
             .eq('id', updateID)
             .select();
 
-        await supabase
+        // delete its comments section
+        const { data: deletedCommentsData } = await supabase
             .from('convo')
             .delete()
-            .eq('id', data[0].comments);
+            .eq('id', deletedAnalysisData[0].comments);
 
-        // this could be done more efficiently with Postgres, but alas, idc!
-        await Promise.all(
-            data[0].convos.map((id) =>
-                supabase
-                    .from('convo')
-                    .delete()
-                    .eq('id', id)
-            )
+        // delete all msgs in comments section
+        supabase
+            .from('msg')
+            .delete()
+            .eq('convo', deletedCommentsData[0].id)
+
+        // delete all associated convos
+        const { data: deletedConvosData } = await supabase
+            .from('convo')
+            .delete()
+            .eq('analysis', deletedAnalysisData[0].id)
+
+        // delete each of their associated msgs
+        deletedConvosData?.forEach((deletedConvo) =>
+            supabase
+                .from('msg')
+                .delete()
+                .eq('analysis', deletedConvo.id)
         );
 
         router.push('/');
@@ -131,22 +136,10 @@ export default function AnalysisBuilder({ auth, user, updateID = null, defaults 
                     />
                 </div>
                 <div>
-                    <span>Categories</span> {/* TODO: LINK TO CATEGORY BROWSER AND RETAIN STATE VIA COOKIES OR SUM */}
+                    <span>Category</span>
                     <input
-                        onChange={(e) => {
-                            d({
-                                type: 'CATEGORIES',
-                                rawCategories: e.target.value,
-                                body: new Set(
-                                    e.target.value
-                                        .replaceAll(/\s+/g, '')
-                                        .replaceAll(/,$/g, '')
-                                        .toLowerCase()
-                                        .split(',')
-                                )
-                            })
-                        }}
-                        value={state.rawCategories}
+                        onChange={(e) => { d({ type: 'CATEGORY', body: e.target.value }) }}
+                        value={state.category}
                         type='text'
                     />
                 </div>

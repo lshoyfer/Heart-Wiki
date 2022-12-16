@@ -149,6 +149,31 @@
     color: #1EEBB5;
 }
 
+
+
 .chatBoxEditMode {
     border-color: #DDF6EF;
+}
+
+.img {
+    max-height: 100%;
+    padding: 5px;
+    width: auto;
+}
+
+.img:hover {
+    border: 1px dotted red;
+}
+
+.imgPreviewContainer {
+    background-color: #121212;
+    width: 100%;
+    height: 300px;
+    overflow: scroll;
+    resize: vertical;
+    border: 1px dashed #1EEBB5;
+    display: flex;
+    justify-content: flex-start;
+    flex: 1 0 auto;
+    flex-wrap: wrap;
 }

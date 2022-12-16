@@ -16,6 +16,7 @@
     border: none;
     font-family: inherit;
     font-size: inherit;
+    margin-top: 4px;
 }
 
 .messageContainer .editDelete:hover {
@@ -30,8 +31,13 @@
 .editingBorder {
     padding: 20px;
 }
-.editingBorder > :not(.info) {
+
+.editingBorder> :not(.info) {
     color: #1EEBB5;
+}
+
+.editingBorder > :not(.info) > img {
+    border: 1px dotted #1EEBB5
 }
 
 .username {
@@ -44,6 +50,27 @@
     margin-left: 42px;
 }
 
-.content > * {
+.content>* {
     margin-block-start: 0;
+}
+
+
+.sentUploadContent {
+    max-height: 100%;
+    padding: 5px;
+    width: auto;
+}
+
+.sentUploadContainer {
+    width: 100%;
+    height: 200px;
+}
+
+.uploadError {
+    color: red;
+    font-family: inherit;
+    font-size: inherit;
+    margin-right: 5px;
+    /* margin-bottom: 3px; */
+    /* margin-left: 10px; */
 }
