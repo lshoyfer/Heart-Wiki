@@ -1,34 +1,11 @@
-# Heart
+# Notice
+This ended up being more of a proof of concept exploring Next13 and getting familiar with the ecosystem, which was very valuable.
 
-Wiki of media conversation and analysis between friends.
+A lot of the code & css is very crude as I intended to refactor much but I ultimately lost interest. Much is unimplemented / not fully realized. I'd say convos are the jewel in terms of functionality.
 
-  
+The code is as is and has a lot of ramblings & abandoned notes. Again, much busywork and refactoring did not end up coming to
+fruition so I apologize -- esepcailly for a lot of the CSS.
 
-### Details must be ironed out but the features will likely include:
-- accounts & authentication
-
-- wiki editing & permissions & standard functions
-
-- page creation
-
-- page update
-
-- page deletion
-
-- page edit requests (permissions)
-
-- markdown editor & preview display
-
-- markdown parser (adds links if desired -- first mention of "Sasuke" will link to Sasuke wiki)
-
-- raw conversation upload via Discord bot &/or webhook (a convo is a specialized page)
-
-- discord linkage
-
-- potential automation
-
-- wiki search
-
-- landing page with all displayable content & recently recently edited/visited pages by you & recently edited/popular pages by users
-
-- aiming for 100% Statically Generated, pure avoidance of Server Side Rendering via Next.js incremental static regeneration & (potentially) preview feature
+# About
+This is a "Wiki" which users can sign up/authenticate, post categories, analyses, and hold live conversations with their friends
+on any topic of their choosing, such as anime. 
